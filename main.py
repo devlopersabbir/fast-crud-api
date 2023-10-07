@@ -1,42 +1,17 @@
-from typing import Union
-
-from fastapi import FastAPI, Request, Response
-from pydantic import BaseModel
-from datetime import date
+from pymongo.mongo_client import MongoClient
+from fastapi import FastAPI
 
 app = FastAPI()
 
 
-@app.get("/")
-async def read_root():
-    return {"result": True}
+uri = ""
 
+# Create a new client and connect to the server
+client = MongoClient(uri)
 
-class User(BaseModel):
-    name: str
-    email: str
-    age: int
-    salary: float
-    isActive: Union[bool, None] = None
-    create_at: date
-
-
-@app.post("/")
-async def store(user: User):
-    try:
-        return {
-            "status": 200,
-            "user": user
-        }
-    except:
-        return {
-            "status": 400,
-            "message": "Error occured"
-        }
-
-
-@app.get("/blocking")
-async def queary():
-    return {
-        "working": True
-    }
+# Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("DB connection successfully")
+except Exception as e:
+    print("Fail to connect DB")
