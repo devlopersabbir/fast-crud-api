@@ -21,3 +21,11 @@ app = FastAPI()
   the `express`
 - This will be the main point of interaction to create all your API.
 - And this `app` variable will help me to run our `uvicorn` application
+
+**Summary of `main.py` file**
+
+- Import FastAPI.
+- Create an app instance.
+- Write a path operation decorator (like `@app.get("/")`).
+- Write a path operation function (like def root(): ... above).
+- Run the development server (like `uvicorn main:app --reload`).
