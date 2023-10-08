@@ -1,3 +1,8 @@
 env
+.env
 # removed cache
 __pycache__
+configs/__pycache__
+models/__pycache__
+routes/__pycache__
+schema/__pycache__

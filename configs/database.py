@@ -5,3 +5,4 @@ client = MongoClient(
 
 db = client.movie_api
 collectionName = db["user"]
+collectionName = db["post"]
