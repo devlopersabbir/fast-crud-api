@@ -1,14 +1,14 @@
 import os
-from pymongo import MongoClient
-from dotenv import load_dotenv, find_dotenv
+from sqlalchemy import create_engine
+from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())
 
-mongodbPassword = os.environ.get("MONGODB_PASSWORD")
-mongodbUsername = os.environ.get("MONGODB_USERNAME")
-mongodbConnectionUrl = f"mongodb+srv://{mongodbUsername}:{mongodbPassword}@cluster0.bplr1gn.mongodb.net/?retryWrites=true&w=majority"
 
-client = MongoClient(mongodbConnectionUrl)
+DB_USERNAME = os.environ.get("DB_USERNAME")
+DB_NAME = os.environ.get("DB_NAME")
+DB_PASSWORD = os.environ.get("DB_PASSWORD")
 
-dbs = client.movie_api
-usersCollection = dbs["users"]
-movieCollection = dbs["movies"]
+engine = create_engine(
+    f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@localhost:3306/{DB_NAME}")
+
+engine.connect()
